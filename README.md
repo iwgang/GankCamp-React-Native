@@ -22,7 +22,7 @@ cd GankCamp-React-Native && npm install
     * **Anroid**  
         react-native run-android 
     * **iOS**  
-        进行ios目录，目录GankCamp.xcodeproj（需要提示安装好xcode）
+        进行ios目录下的GankCamp.xcodeproj文件（需提前安装好xcode）
 
 ### 感谢[Gank.io](http://gank.io)提供数据api
     
