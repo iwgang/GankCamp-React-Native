@@ -6,6 +6,22 @@
 ### 截图
 ![](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/s1_android.gif)
 
+左图：Android， 右图：iOS  
+<img src="https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/scr1_android.png" alt="Drawing" width="400px" height="600px" />     <img src="https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/scr1_ios.png" alt="Drawing" width="400px" height="600px"/>
+
+### 运行
+* 步骤一
+```
+git clone https://github.com/iwgang/GankCamp-React-Native.git
+cd GankCamp-React-Native && npm install
+```
+
+* 步骤二
+    * **Anroid**  
+        react-native run-android 
+    * **iOS**  
+        进行ios目录，目录GankCamp.xcodeproj（需要提示安装好xcode）
+
 ### 感谢[Gank.io](http://gank.io)提供数据api
     
 ### 使用到的技术点
