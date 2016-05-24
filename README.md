@@ -3,6 +3,8 @@
 # GankCamp-React-Native
 这是一款用react-native实现的Gank.io(干货集中营)客户端，支持Android及iOS，并针对不同平台的设计规范，界面也有一些差异化.
 
+### 下载[APK](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/app-release.apk)（iOS请自行编译）
+
 ### 截图
 ![](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/s1_android.gif)
 
