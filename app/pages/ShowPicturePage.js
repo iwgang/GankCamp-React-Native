@@ -4,9 +4,10 @@
  * https://github.com/iwgang/GankCamp-React-Native
  */
 import React, { Component, PropTypes } from 'react';
-import { StyleSheet, View, WebView } from 'react-native';
+import { StyleSheet, View, WebView, Dimensions, Platform } from 'react-native';
 import CustomTitleBarComp from '../comp/CustomTitleBarComp';
 import CommonLoadView from '../comp/CommonLoadView';
+import RNTouchImageView from '../comp/TouchImageComp';
 
 
 class ShowPicturePage extends Component {
@@ -16,8 +17,18 @@ class ShowPicturePage extends Component {
   };
 
   render() {
-    return (
-      <View style={{flex: 1}}>
+    let contentView;
+    if (Platform.OS === 'android') {
+      contentView = (
+        <RNTouchImageView 
+          src={this.props.picUrl}
+          style={{height: Dimensions.get('window').height}}
+          onClick={() => LOG('图片单击啦')}
+          onLongClick={() => LOG('图片长按啦')}
+          />
+      );
+    } else {
+      contentView = (
         <WebView 
           ref="webView"
           source={{uri: this.props.picUrl}}
@@ -29,6 +40,13 @@ class ShowPicturePage extends Component {
           renderLoading={() => <CommonLoadView loadState="ing" />}
           renderError={() => <CommonLoadView loadState="error" onRetry={() => this.refs.webView.reload()} />} 
           />
+      );
+    }
+
+
+    return (
+      <View style={{flex: 1, backgroundColor: '#000000'}}>
+        {contentView}
         <CustomTitleBarComp 
           titleBarStyle={styles.titleBarStyle}
           onLeftBtnClick={() => this.props.navigator.pop()}

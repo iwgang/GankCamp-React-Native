@@ -1,4 +1,4 @@
-export const DEBUG = false; // 调试模式
+export const DEBUG = true; // 调试模式
 export const RDEBUG = false; // Redux调试模式
 
 export const APP_MAIN_COLOR = '#9C978B'; // APP主颜色
