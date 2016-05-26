@@ -12,6 +12,12 @@ import RNTouchImageView from '../comp/TouchImageComp';
 
 class ShowPicturePage extends Component {
 
+  constructor(props) {
+    super(props);
+  
+    this.exitPage = this._exitPage.bind(this);
+  }
+
   static propTypes = {
     picUrl: PropTypes.string.isRequired,
   };
@@ -23,8 +29,7 @@ class ShowPicturePage extends Component {
         <RNTouchImageView 
           src={this.props.picUrl}
           style={{height: Dimensions.get('window').height}}
-          onClick={() => LOG('图片单击啦')}
-          onLongClick={() => LOG('图片长按啦')}
+          onClick={this.exitPage}
           />
       );
     } else {
@@ -49,11 +54,14 @@ class ShowPicturePage extends Component {
         {contentView}
         <CustomTitleBarComp 
           titleBarStyle={styles.titleBarStyle}
-          onLeftBtnClick={() => this.props.navigator.pop()}
+          onLeftBtnClick={this.exitPage}
           />
       </View>
     );
+  }
 
+  _exitPage() {
+    this.props.navigator.pop();
   }
 
 }

@@ -22,10 +22,10 @@ class TouchImageView extends Component {
 
   _onChange(event) {
     let eventType = event.nativeEvent.eventType;
-    if (this.props.onClick && eventType === 'onClick') {
-    	this.props.onClick();
-    } else if (this.props.onLongClick && eventType === 'onLongClick') {
-			this.props.onLongClick();
+    if (eventType === 'onClick') {
+    	this.props.onClick && this.props.onClick();
+    } else if (eventType === 'onLongClick') {
+			this.props.onLongClick && this.props.onLongClick();
     }
   }
  
