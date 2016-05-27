@@ -21,12 +21,11 @@ export default function girlPage(state=initialState, action) {
         isRefreshing: false,
       };
     case FETCH_GIRL_DATA_STATUS.START:
-      let isRefreshing = action.opt === 1 ? true : false;
       return {
         ...state,
         status: action.type,
         opt: action.opt,
-        isRefreshing: isRefreshing,
+        isRefreshing: action.opt === 1,
       };
     case FETCH_GIRL_DATA_STATUS.SUCCESS:
       let newContent = action.opt === 2 ? [...state.dataSource, ...action.data.results] : action.data.results;

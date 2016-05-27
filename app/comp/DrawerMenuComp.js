@@ -13,9 +13,9 @@ class DrawerMenuComp extends Component {
   _renderDrawerItem(tag, itemText, itemIcon) {
     return (
       <CommonTouchableComp onPress={this.props.onTabSelect(tag)}>
-        <View style={[styles.drawerItemContainer, this.props.tab === tag ? styles.drawerItemContainerSelected : {}]}>
+        <View style={[styles.drawerItemContainer, this.props.tab === tag && styles.drawerItemContainerSelected]}>
           <Image source={itemIcon} />
-          <Text style={[styles.drawerItemText, this.props.tab === tag ? styles.drawerItemTextSelected : {}]}>{itemText}</Text>
+          <Text style={[styles.drawerItemText, this.props.tab === tag && styles.drawerItemTextSelected]}>{itemText}</Text>
         </View>
       </CommonTouchableComp>
     );
@@ -34,6 +34,8 @@ class DrawerMenuComp extends Component {
         {this._renderDrawerItem(HOME_TABS.GANK_DAY, '推荐', ICON_TAB_GANK)}
 
         {this._renderDrawerItem(HOME_TABS.GIRL, '妹纸', ICON_TAB_GIRL)}
+
+        {this._renderDrawerItem(HOME_TABS.COLLECT, '收藏', ICON_TAB_GIRL)}
   	  </View>
     );
   }

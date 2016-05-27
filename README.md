@@ -32,6 +32,7 @@ cd GankCamp-React-Native && npm install
 * React.js + JSX
 * ES6
 * Redux
+* realm
    
 
 ### 感谢以下开源
@@ -42,6 +43,8 @@ cd GankCamp-React-Native && npm install
 * [f8app](https://github.com/fbsamples/f8app)
 * [React-Native-Gank (By Bob1993)](https://github.com/Bob1993/React-Native-Gank)
 * [react-native-spinkit（loading动画）](https://github.com/maxs15/react-native-spinkit)
+* [realm）](https://realm.io/docs/react-native/latest)
+* [PhotoView（by bm-x，android端的图片查看原生库）](https://github.com/bm-x/PhotoView)
 
 ### License
 

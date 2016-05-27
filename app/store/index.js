@@ -4,7 +4,7 @@ import reducers from '../reducers';
 import { DEBUG, RDEBUG } from '../GlobalConst';
 
 const logger = store => next => action => {
-	if (!DEBUG || !RDEBUG) return next(action);
+	return next(action);
 
 	if (typeof action === 'function') {
 		console.log('>>>> logger => dispatching a function');

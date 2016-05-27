@@ -18,7 +18,6 @@ class CustomTitleBarComp extends Component {
     super(props);
 
     this.isMainPage = this.props.isMainPage;
-    this.rightText = this.props.rightText;
   }
 
   /**
@@ -45,11 +44,11 @@ class CustomTitleBarComp extends Component {
       leftView = <View style={styles.placeholderView} />;
     }
 
-    if (this.rightText) {
+    if (this.props.rightText) {
       rightView = (
         <CommonTouchableComp onPress={this.props.onRightBtnClick}>
           <View style={styles.bothBtnContainer}>
-            <Text style={styles.titleBarRightText}>{this.props.rightText}</Text>
+            <Text style={[styles.titleBarRightText, this.props.rightText.length > 3 && {fontSize: 12}]}>{this.props.rightText}</Text>
           </View>
         </CommonTouchableComp>
       );

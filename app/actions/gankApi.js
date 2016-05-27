@@ -21,10 +21,12 @@ function fetchGankCategoryList(typeObj, opt, category, pageNo, ext) {
 	  dispatch({type: typeObj.START, opt: opt});
 	  let reqUrl = `http://gank.io/api/data/${category}/${PAGE_NUM}/${pageNo}`;
 	  RLOG('fetchGankList：' + reqUrl);
-	  fetch(reqUrl)
-	    .then((response) => response.json())
-	    .then((responseData) => dispatch({type: typeObj.SUCCESS, opt, ext, data: responseData}))
-	    .catch((error) => dispatch({type: typeObj.FAILURE, opt, ext, error}))
+	  return fetch(reqUrl)
+				    .then((response) => response.json())
+				    .then(
+				    	(responseData) => dispatch({type: typeObj.SUCCESS, opt, ext, data: responseData}),
+				    	(error) => dispatch({type: typeObj.FAILURE, opt, ext, error})	
+				    );
 	};
 }
 
@@ -58,9 +60,11 @@ export function fetchGankDay(day) {
 	  dispatch({type: FETCH_GANK_DAY_DATA_STATUS.START, day});
 	  let reqUrl = `http://gank.io/api/day/${day}`;
 	  RLOG('fetchGankDayUrl：' + reqUrl);
-	  fetch(reqUrl)
-	    .then((response) => response.json())
-	    .then((responseData) => dispatch({type: FETCH_GANK_DAY_DATA_STATUS.SUCCESS, day, data: responseData}))
-	    .catch((error) => dispatch({type: FETCH_GANK_DAY_DATA_STATUS.FAILURE, day, error}))
+	  return fetch(reqUrl)
+				    .then((response) => response.json())
+				    .then(
+				    	(responseData) => dispatch({type: FETCH_GANK_DAY_DATA_STATUS.SUCCESS, day, data: responseData}),
+				    	(error) => dispatch({type: FETCH_GANK_DAY_DATA_STATUS.FAILURE, day, error})
+				    );
 	};
 }

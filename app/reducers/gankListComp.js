@@ -27,13 +27,12 @@ export default function gankListComp(state=initialState, action) {
         isRefreshing: false,
       };
     case FETCH_GANK_DATA_STATUS.START:
-      let isRefreshing = action.opt === 1 ? true : false;
       return {
         ...state,
         status: action.type,
         opt: action.opt,
         ext: action.ext,
-        isRefreshing: isRefreshing,
+        isRefreshing: action.opt === 1,
       };
     case FETCH_GANK_DATA_STATUS.SUCCESS:
       let newContent = action.opt === 2 ? [...state.dataArray, ...action.data.results] : action.data.results;

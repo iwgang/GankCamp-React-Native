@@ -21,7 +21,7 @@ class HeaderTabItem extends Component {
   render() {
     return (
       <TouchableHighlight underlayColor={'rgba(0,0,0,0)'} onPress={this.props.onTabClick}>
-        <View style={[styles.headerTabsTextContainer, this.props.selected ? styles.headerTabsTextContainerSel : {}]}>
+        <View style={[styles.headerTabsTextContainer, this.props.selected && styles.headerTabsTextContainerSel]}>
           <Text style={styles.headerTabsText}>{this.props.tabText}</Text>
         </View>
       </TouchableHighlight>

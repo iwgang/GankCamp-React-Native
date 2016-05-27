@@ -7,7 +7,6 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  Platform,
   ListView,
   RefreshControl,
   Text,
@@ -17,7 +16,6 @@ import {
 import { connect } from 'react-redux';
 
 import WebViewPage from '../WebViewPage';
-import CustomTitleBarComp from '../../comp/CustomTitleBarComp';
 import CommonTouchableComp from '../../comp/CommonTouchableComp';
 import CommonLoadView from '../../comp/CommonLoadView';
 import { FETCH_GANK_DATA_STATUS } from '../../actions/types';
@@ -84,7 +82,7 @@ class GankListComp extends Component {
           onEndReachedThreshold={5}
           onEndReached={this._onLoadMore.bind(this)}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
-          renderFooter={this.props.isLoadMore ? this._footerView : null}
+          renderFooter={this.props.isLoadMore && this._footerView}
           refreshControl={
               <RefreshControl
                   refreshing={this.props.isRefreshing}
@@ -205,7 +203,6 @@ const styles = StyleSheet.create({
   },
   line2ItemViewContainer: {
     flexDirection: 'row',
-    alignSelf: 'stretch',
   },
   title: {
     fontSize: 16,

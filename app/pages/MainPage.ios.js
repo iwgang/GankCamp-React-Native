@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import HomePage from './HomePage'
 import GankRecommendPage from './GankRecommendPage'
 import GirlPage from './GirlPage'
+import CollectListPage from './CollectListPage'
 import { HOME_TABS } from '../actions/types';
 import { switchTab } from '../actions/navigator';
 
@@ -48,6 +49,13 @@ class MainPage extends Component {
           selected={this.props.tab === HOME_TABS.GIRL}
           onPress={this._onTabSelect.bind(this, HOME_TABS.GIRL)}>
           <GirlPage navigator={this.props.navigator} />
+        </TabBarIOS.Item>
+        <TabBarIOS.Item
+          title="收藏"
+          icon={require('../img/tabicon/ic_home_tab_gank.png')}
+          selected={this.props.tab === HOME_TABS.GIRL}
+          onPress={this._onTabSelect.bind(this, HOME_TABS.GIRL)}>
+          <GankRecommendPage navigator={this.props.navigator} />
         </TabBarIOS.Item>
       </TabBarIOS>
   	);

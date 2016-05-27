@@ -12,6 +12,7 @@ import HomePage from './HomePage'
 import GankRecommendPage from './GankRecommendPage'
 import GirlPage from './GirlPage'
 import AboutPage from './AboutPage'
+import CollectListPage from './CollectListPage'
 import DrawerMenuComp from '../comp/DrawerMenuComp';
 import { HOME_TABS } from '../actions/types';
 import { switchTab } from '../actions/navigator';
@@ -67,6 +68,10 @@ class MainPage extends Component {
       case HOME_TABS.ABOUT: 
         return (
           <AboutPage navigator={this.props.navigator} onDrawerMenuToggle={this.onDrawerMenuToggle} />
+        );   
+      case HOME_TABS.COLLECT: 
+        return (
+          <CollectListPage navigator={this.props.navigator} onDrawerMenuToggle={this.onDrawerMenuToggle} />
         );
     }
 

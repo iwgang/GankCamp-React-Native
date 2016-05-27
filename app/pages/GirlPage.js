@@ -81,7 +81,7 @@ class GirlPager extends Component {
           renderItem={this._renderItem.bind(this)}
           onEndReachedThreshold={5}
           onEndReached={this._onLoadMore.bind(this)}
-          renderFooter={this.props.isLoadMore ? this._footerView : null}
+          renderFooter={this.props.isLoadMore && this._footerView}
           refreshControl={
               <RefreshControl
                   refreshing={this.props.isRefreshing}

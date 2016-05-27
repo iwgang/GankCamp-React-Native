@@ -5,6 +5,6 @@ export function showToast(showMsg) {
 	  // Android
 	  ToastAndroid.show(showMsg, ToastAndroid.SHORT);
 	} else {
-	  // iOS
+	  // iOS TODO 待实现
 	}
 }
