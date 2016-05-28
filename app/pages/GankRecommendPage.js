@@ -142,9 +142,9 @@ class GankDayPage extends Component {
   }
 
   _renderGankDayContentViewWrapIOS() {
-    return (
-      <View style={{flex: 1}}>
-        {this._renderGankDayContentView()}
+    let selDayHistoryContentView;
+    if (this.dayHistorys !== undefined) {
+      selDayHistoryContentView = (
         <Modal 
           transparent={true}
           visible={this.state.pickerDayHistoryModalVisible}
@@ -171,6 +171,13 @@ class GankDayPage extends Component {
             </View>
           </View>
         </Modal>
+      );
+    }
+
+    return (
+      <View style={{flex: 1}}>
+        {this._renderGankDayContentView()}
+        {selDayHistoryContentView}
       </View>
     );
   }
@@ -180,7 +187,8 @@ class GankDayPage extends Component {
   	let girlPicUrl = dataSource.results.福利[0].url;
   	let categoryContentView = this._renderCategoryContentViews(dataSource);
   	return (
-      <ScrollView>
+      <ScrollView
+        automaticallyAdjustContentInsets={false}>
         <View style={{flex: 1, paddingBottom: 60}}>
           <Image source={{uri: girlPicUrl}} style={styles.headerGirlImage}/>
           {categoryContentView}
@@ -192,7 +200,8 @@ class GankDayPage extends Component {
   _renderDayHistoryDrawerMenuView() {
     if (this.dayHistorys === undefined) return;
     return (
-      <ScrollView>
+      <ScrollView
+        automaticallyAdjustContentInsets={false}>
         <View>
           {this.dayHistorys.map((day, index) => {
             return (

@@ -6,7 +6,7 @@
  * https://github.com/iwgang/
  */
 import React, { Component } from 'react';
-import { Navigator, StatusBar, StyleSheet, View, BackAndroid } from 'react-native';
+import { Navigator, StatusBar, StyleSheet, View, BackAndroid, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import MainPage from './pages/MainPage';
 import { showToast } from './comp/CommonComp';
@@ -26,6 +26,7 @@ class RootPage extends Component {
     this.onBack = this._onBack.bind(this);
     this.addBackButtonListener = this._addBackButtonListener.bind(this);
     this.removeBackButtonListener = this._removeBackButtonListener.bind(this);
+    this.handlerConfigureScene = this._handlerConfigureScene.bind(this);
   }
 
   getChildContext() {
@@ -41,6 +42,28 @@ class RootPage extends Component {
 
   componentWillUnmount() {
     BackAndroid.removeEventListener('hardwareBackPress', this.onBack);
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <StatusBar translucent={true} backgroundColor={'rgba(0, 0, 0, 0.2)'} />
+        <Navigator
+          ref={component => this.navigator = component}
+          initialRoute={{}}
+          configureScene={this.handlerConfigureScene}
+          renderScene={this._renderScene.bind(this)}
+          />
+      </View>
+    );
+  }
+
+  _handlerConfigureScene() {
+    if (Platform.OS === 'android') {
+      return Navigator.SceneConfigs.FloatFromBottomAndroid;
+    } else {
+      return Navigator.SceneConfigs.PushFromRight;
+    }
   }
 
   _addBackButtonListener(listener) {
@@ -84,20 +107,6 @@ class RootPage extends Component {
     }
 
     return <MainPage navigator={navigator} {...route} />;
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <StatusBar translucent={true} backgroundColor={'rgba(0, 0, 0, 0.2)'} />
-        <Navigator
-          ref={component => this.navigator = component}
-          initialRoute={{}}
-          configureScene={() => Navigator.SceneConfigs.FloatFromBottomAndroid}
-          renderScene={this._renderScene.bind(this)}
-          />
-      </View>
-    );
   }
 
 }

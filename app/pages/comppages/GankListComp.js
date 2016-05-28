@@ -79,6 +79,7 @@ class GankListComp extends Component {
         <ListView
           dataSource={this.props.dataSource}
           renderRow={this._renderItem.bind(this)}
+          automaticallyAdjustContentInsets={false}
           onEndReachedThreshold={5}
           onEndReached={this._onLoadMore.bind(this)}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
@@ -186,7 +187,6 @@ class GankListComp extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
     backgroundColor: COMMON_BACKGROUND_COLOR,
   },
   footerContainer: {
@@ -197,8 +197,6 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   itemViewContainer: {
-    flexDirection: 'column',
-    alignItems: 'flex-start',
     padding: 10,
   },
   line2ItemViewContainer: {

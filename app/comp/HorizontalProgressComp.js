@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, ProgressViewIOS, ProgressBarAndroid, Platform } from 'react-native';
+import { View, ProgressViewIOS, ProgressBarAndroid, Platform } from 'react-native';
 
 
 class HorizontalProgressComp extends Component {
@@ -7,28 +7,26 @@ class HorizontalProgressComp extends Component {
   render() {
     if (Platform.OS === 'android') {
   	  return (
-	  	 	<ProgressBarAndroid 
-	        styleAttr="Horizontal" 
-	        color={this.props.color} 
-	        progress={60}
-	        style={this.props.style}
-	        />
+	    <ProgressBarAndroid 
+	      styleAttr="Horizontal" 
+	      color={this.props.color} 
+	      progress={60}
+	      style={this.props.style}
+	      />
       );
     } else {
-  	  return (
-	  	 	<ProgressViewIOS  
-	  	 		progressTintColor="purple" 
-	  	 		/>
+      return (
+	    <ProgressViewIOS  
+	      progress={0.98}
+	      trackTintColor={'#CCCCCC'}
+	  	  progressTintColor={this.props.color}
+	      style={this.props.style}
+	  	  />
       );
     }
   }
 
 }
-
-
-const styles = StyleSheet.create({
-
-});
 
 
 export default HorizontalProgressComp;

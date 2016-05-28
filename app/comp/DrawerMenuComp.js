@@ -5,7 +5,9 @@ import { HOME_TABS } from '../actions/types';
 import { COMMON_SELECT_COLOR } from '../GlobalConst';
 
 const ICON_TAB_GANK = require('../img/tabicon/ic_home_tab_gank.png');
+const ICON_TAB_REC = require('../img/tabicon/ic_home_tab_rec.png');
 const ICON_TAB_GIRL = require('../img/tabicon/ic_home_tab_girl.png');
+const ICON_TAB_COLLECT = require('../img/tabicon/ic_home_tab_collect.png');
 
 
 class DrawerMenuComp extends Component {
@@ -31,11 +33,11 @@ class DrawerMenuComp extends Component {
         </View>
         {this._renderDrawerItem(HOME_TABS.HOME, '干货', ICON_TAB_GANK)}
 
-        {this._renderDrawerItem(HOME_TABS.GANK_DAY, '推荐', ICON_TAB_GANK)}
+        {this._renderDrawerItem(HOME_TABS.GANK_DAY, '推荐', ICON_TAB_REC)}
 
         {this._renderDrawerItem(HOME_TABS.GIRL, '妹纸', ICON_TAB_GIRL)}
 
-        {this._renderDrawerItem(HOME_TABS.COLLECT, '收藏', ICON_TAB_GIRL)}
+        {this._renderDrawerItem(HOME_TABS.COLLECT, '收藏', ICON_TAB_COLLECT)}
   	  </View>
     );
   }
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
   	textAlignVertical: 'center',
   },
   drawerItemTextSelected: {
-    color: '#333333',
+    color: '#495c73',
   },
 });
 

@@ -20,7 +20,8 @@ class AboutPage extends Component {
           title="关于" 
           onLeftBtnClick={() => this.props.navigator.pop()} 
           />
-        <ScrollView>
+        <ScrollView
+          automaticallyAdjustContentInsets={false}>
           <View style={styles.contentContainer}>
             <Text style={styles.contentLabel}>关于APP</Text>
             <Text style={styles.contentDesc}>

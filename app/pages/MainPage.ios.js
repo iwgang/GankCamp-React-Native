@@ -38,7 +38,7 @@ class MainPage extends Component {
         </TabBarIOS.Item>
         <TabBarIOS.Item
           title="推荐"
-          icon={require('../img/tabicon/ic_home_tab_girl.png')}
+          icon={require('../img/tabicon/ic_home_tab_rec.png')}
           selected={this.props.tab === HOME_TABS.GANK_DAY}
           onPress={this._onTabSelect.bind(this, HOME_TABS.GANK_DAY)}>
           <GankRecommendPage navigator={this.props.navigator} />
@@ -52,10 +52,10 @@ class MainPage extends Component {
         </TabBarIOS.Item>
         <TabBarIOS.Item
           title="收藏"
-          icon={require('../img/tabicon/ic_home_tab_gank.png')}
-          selected={this.props.tab === HOME_TABS.GIRL}
-          onPress={this._onTabSelect.bind(this, HOME_TABS.GIRL)}>
-          <GankRecommendPage navigator={this.props.navigator} />
+          icon={require('../img/tabicon/ic_home_tab_collect.png')}
+          selected={this.props.tab === HOME_TABS.COLLECT}
+          onPress={this._onTabSelect.bind(this, HOME_TABS.COLLECT)}>
+          <CollectListPage navigator={this.props.navigator} />
         </TabBarIOS.Item>
       </TabBarIOS>
   	);

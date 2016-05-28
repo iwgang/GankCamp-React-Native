@@ -42,6 +42,7 @@ class GridView extends Component {
     return (
       <ListView
         {...this.props}
+        automaticallyAdjustContentInsets={false}
         renderRow={this._renderGroup.bind(this)}
         dataSource={ds.cloneWithRows(groups)}
       />

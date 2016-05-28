@@ -42,6 +42,7 @@ class CollectListPage extends Component {
       } else {
         contentView = (
           <ListView
+            automaticallyAdjustContentInsets={false}
             dataSource={this.props.dataSource}
             renderRow={this._renderItem.bind(this)}
             renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
@@ -93,12 +94,9 @@ class CollectListPage extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
     backgroundColor: COMMON_BACKGROUND_COLOR,
   },
   itemViewContainer: {
-    flexDirection: 'column',
-    alignItems: 'flex-start',
     padding: 10,
   },
   title: {
