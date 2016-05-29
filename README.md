@@ -6,10 +6,15 @@
 ### 下载[APK](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/app-release.apk)（iOS请自行编译）
 
 ### 截图
-![](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/s1_android.gif)
+![](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/gif_android.gif)
 
 左图：Android， 右图：iOS  
-<img src="https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/scr1_android.png" alt="Drawing" width="400px" height="600px" />     <img src="https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/scr1_ios.png" alt="Drawing" width="400px" height="600px"/>
+<img src="https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/s1_android.png" width="400px" height="600px" />     <img src="https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/s1_ios.png" width="400px" height="600px"/>
+
+其它 (下列截图为Android版本的，iOS版本类似)
+![](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/s2_android.png)
+![](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/s3_android.png)
+![](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/smenu_android.png)
 
 ### 运行
 * 步骤一
@@ -41,11 +46,11 @@ cd GankCamp-React-Native && npm install
 * [react-redux](https://github.com/reactjs/react-redux)
 * [redux-thunk](https://github.com/gaearon/redux-thunk)
 * [f8app](https://github.com/fbsamples/f8app)
+* [realm](https://realm.io/docs/react-native/latest)
 * [React-Native-Gank (By Bob1993)](https://github.com/Bob1993/React-Native-Gank)
 * [react-native-spinkit（loading动画）](https://github.com/maxs15/react-native-spinkit)
-* [realm）](https://realm.io/docs/react-native/latest)
-* [PhotoView（by bm-x，android端的图片查看原生库）](https://github.com/bm-x/PhotoView)
+* [PhotoView（by bm-x，android端的图片查看 原生库）](https://github.com/bm-x/PhotoView)
 
 ### License
 
-This project is available under the MIT license.
+`MIT`
