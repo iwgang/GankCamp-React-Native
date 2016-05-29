@@ -8,13 +8,13 @@
 ### 截图
 ![](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/gif_android.gif)
 
-左图：Android， 右图：iOS  
+**左图：Android， 右图：iOS**  
 <img src="https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/s1_android.jpg" width="360px" height="600px" />     <img src="https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/s1_ios.png" width="360px" height="600px"/>
 
-其它 (下列截图为Android版本的，iOS版本类似)
-![](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/s2_android.jpg)
-![](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/s3_android.jpg)
-![](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/smenu_android.jpg)
+**其它截图** (下列截图为Android版本的，iOS版本类似)  
+<img src="https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/s2_android.jpg" width="400px" height="650px"/>
+<img src="https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/s3_android.jpg" width="400px" height="650px"/>
+<img src="https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/smenu_android.jpg" width="400px" height="650px"/>
 
 ### 运行
 * 步骤一
