@@ -3,7 +3,7 @@
  *    1. 初始化导航器（Navigator）
  *    2. 处理Android返回键事件处理
  * Created by iWgang on 16/05/15.
- * https://github.com/iwgang/
+ * https://github.com/iwgang/GankCamp-React-Native
  */
 import React, { Component } from 'react';
 import { Navigator, StatusBar, StyleSheet, View, BackAndroid, Platform } from 'react-native';
@@ -80,14 +80,14 @@ class RootPage extends Component {
       if (this.backButtonListeners[i]()) return true;
     }
 
-    var navigator = this.navigator;
+    let navigator = this.navigator;
 
     if (navigator && navigator.getCurrentRoutes().length > 1) {
       navigator.pop();
       return true;
     }
 
-    var curTimestamp = new Date().getTime();
+    let curTimestamp = new Date().getTime();
 
     // 判断3秒内两次按返回键才真正退出APP
     if (this.extTimestamp !== undefined && curTimestamp - this.extTimestamp <= 3000) {

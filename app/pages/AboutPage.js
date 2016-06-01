@@ -8,7 +8,7 @@ import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-nati
 
 import WebViewPage from './WebViewPage';
 import CustomTitleBarComp from '../comp/CustomTitleBarComp';
-import { COMMON_BACKGROUND_COLOR } from '../GlobalConst';
+import { COMMON_BACKGROUND_COLOR, APP_VERSION } from '../GlobalConst';
 
 
 class AboutPage extends Component {
@@ -23,7 +23,7 @@ class AboutPage extends Component {
         <ScrollView
           automaticallyAdjustContentInsets={false}>
           <View style={styles.contentContainer}>
-            <Text style={styles.contentLabel}>关于APP</Text>
+            <Text style={styles.contentLabel}>关于APP ({APP_VERSION})</Text>
             <Text style={styles.contentDesc}>
               {'      '}这是一款用react-native实现的Gank.io(干货集中营)客户端，支持Android及iOS，并针对不同平台的设计规范，界面也有一些差异化.{'\n'}
               {'      '}这里每日分享妹子图 和 技术干货，还有供大家中午休息的休闲视频，让你休闲技术两不误.

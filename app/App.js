@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 
 import configureStore from './store';
 import RootPage from './RootPage';
+import SplashPage from './SplashPage';
 import { DEBUG, RDEBUG } from './GlobalConst';
 
 global.LOG = (msg) => {
@@ -16,14 +17,30 @@ global.RLOG = (msg) => {
 
 const store = configureStore();
 
-export default class App extends Component {
+
+class App extends Component {
+
+	 constructor(props) {
+    super(props);
+
+    this.state = {
+      isShowSplash: true,
+    };
+  }
  
   render() {
-    return (
-	  <Provider store={store}>
-	    <RootPage />
-	  </Provider>
-	);
+  	if (this.state.isShowSplash) {
+  		return <SplashPage onAnimEnd={() => this.setState({isShowSplash: false})} />;
+  	} else {
+	    return (
+			  <Provider store={store}>
+			    <RootPage />
+			  </Provider>
+			);
+  	}
   }
 
 }
+
+
+export default App;

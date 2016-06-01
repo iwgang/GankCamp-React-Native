@@ -5,7 +5,7 @@
  * https://github.com/iwgang/GankCamp-React-Native
  */
 import React, { Component } from 'react';
-import { View, StyleSheet, DrawerLayoutAndroid } from 'react-native';
+import { View, StyleSheet, DrawerLayoutAndroid, Navigator } from 'react-native';
 import { connect } from 'react-redux';
 
 import HomePage from './HomePage'
@@ -33,6 +33,17 @@ class MainPage extends Component {
     this.onDrawerClose = this._onDrawerClose.bind(this);
     this.onBackButton = this._onBackButton.bind(this);
     this.onDrawerMenuToggle = this._onDrawerMenuToggle.bind(this);
+
+    this.state = {
+      curSelTag: HOME_TABS.HOME,
+    };
+
+    this.ROUTE_STACKS = [
+      { component: HomePage },
+      { component: GankRecommendPage },
+      { component: GirlPage },
+      { component: CollectListPage },
+    ];
   }
 
   render() {
@@ -44,38 +55,27 @@ class MainPage extends Component {
         renderNavigationView={this.renderDrawerMenuView}
         onDrawerOpen={this.onDrawerOpen}
         onDrawerClose={this.onDrawerClose} >
-        <View style={styles.content} key={this.props.tab}>
-          {this._renderContentPage()}
-        </View>
+        <Navigator
+          ref={component => this.navigator = component}
+          navigator={this.props.navigator}
+          configureScene={() => {
+              return {
+                ...Navigator.SceneConfigs.FadeAndroid,
+                defaultTransitionVelocity: 1000,
+                gestures: {}
+              };
+          }}
+          initialRoute={this.ROUTE_STACKS[0]}
+          initialRouteStack={this.ROUTE_STACKS}
+          renderScene={this._renderScene.bind(this)}
+          />
       </DrawerLayoutAndroid>
     );
   }
 
-  _renderContentPage() {
-    switch (this.props.tab) {
-      case HOME_TABS.HOME: 
-        return (
-          <HomePage navigator={this.props.navigator} onDrawerMenuToggle={this.onDrawerMenuToggle} />
-        );
-      case HOME_TABS.GANK_DAY:
-        return (
-          <GankRecommendPage navigator={this.props.navigator} onDrawerMenuToggle={this.onDrawerMenuToggle} />
-        )
-      case HOME_TABS.GIRL: 
-        return (
-          <GirlPage navigator={this.props.navigator} onDrawerMenuToggle={this.onDrawerMenuToggle} />
-        );
-      case HOME_TABS.ABOUT: 
-        return (
-          <AboutPage navigator={this.props.navigator} onDrawerMenuToggle={this.onDrawerMenuToggle} />
-        );   
-      case HOME_TABS.COLLECT: 
-        return (
-          <CollectListPage navigator={this.props.navigator} onDrawerMenuToggle={this.onDrawerMenuToggle} />
-        );
-    }
-
-    throw new Error(`Unknown tab ${this.props.tab}`);
+  _renderScene(route, navigator) {
+    var {component:Component, ...route} = route;
+    return <Component navigator={this.props.navigator} {...route} onDrawerMenuToggle={this.onDrawerMenuToggle} curSelTag={this.state.curSelTag} />;
   }
 
   _onDrawerOpen() {
@@ -91,6 +91,22 @@ class MainPage extends Component {
 
     if (this.props.tab !== tab) {
       this.props.dispatch(switchTab(tab));
+      this.setState({curSelTag: tab});
+
+      switch (tab) {
+        case HOME_TABS.HOME: 
+          this.navigator.jumpTo(this.ROUTE_STACKS[0]);
+          break;
+        case HOME_TABS.GANK_DAY:
+          this.navigator.jumpTo(this.ROUTE_STACKS[1]);
+          break;
+        case HOME_TABS.GIRL: 
+          this.navigator.jumpTo(this.ROUTE_STACKS[2]);
+          break;
+        case HOME_TABS.COLLECT: 
+          this.navigator.jumpTo(this.ROUTE_STACKS[3]);
+          break;
+      }
     }
   }
 

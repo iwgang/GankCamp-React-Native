@@ -5,7 +5,7 @@
  * https://github.com/iwgang/GankCamp-React-Native
  */
 import React, { Component } from 'react';
-import { StyleSheet, ListView, Text, View } from 'react-native';
+import { StyleSheet, ListView, Text, View, Platform } from 'react-native';
 import { connect } from 'react-redux';
 
 import WebViewPage from './WebViewPage';
@@ -16,16 +16,35 @@ import { FETCH_COLLECT_DATA_STATUS } from '../actions/types';
 import { fetchCollectListAction } from '../actions/collect';
 import { showToast } from '../comp/CommonComp';
 import { COMMON_BACKGROUND_COLOR } from '../GlobalConst';
+import { HOME_TABS } from '../actions/types';
 
 
 class CollectListPage extends Component {
 
   constructor(props) {
     super(props);
+
+    this.isInitLoadData = false;
   }
 
   componentDidMount() {
-    this._fetchData();
+    if (Platform.OS !== 'android') {
+      this._fetchData();
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (Platform.OS !== 'android') return true;
+
+    if (nextProps.curSelTag !== HOME_TABS.COLLECT) return false;
+
+    if (!this.isInitLoadData) {
+      this.isInitLoadData = true;
+      this._fetchData();
+      return false;
+    }
+
+    return true;
   }
 
   render() {

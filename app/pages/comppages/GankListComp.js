@@ -168,7 +168,7 @@ class GankListComp extends Component {
         <View style={styles.itemViewContainer}>
           <Text style={styles.title} numberOfLines={2}>{gankData.desc}</Text>
           <View style={styles.line2ItemViewContainer}>
-            <Text style={styles.author}>{typeof gankData.who !== 'undefined' ? 'via：' + gankData.who : ''}</Text>
+            <Text style={styles.author}>{typeof gankData.who !== 'undefined' && gankData.who !== null ? 'via：' + gankData.who : ''}</Text>
             <Text style={styles.time}>{this._formatTime(gankData.publishedAt)}</Text>
           </View>
         </View>

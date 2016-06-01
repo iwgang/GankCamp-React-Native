@@ -12,6 +12,7 @@ import {
   Text,
   View,
   TouchableOpacity,
+  Platform,
   ProgressBarAndroid as ProgressBar,
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -24,6 +25,7 @@ import { FETCH_GIRL_DATA_STATUS } from '../actions/types';
 import { fetchGirlList } from '../actions/gankApi';
 import { showToast } from '../comp/CommonComp';
 import { COMMON_BACKGROUND_COLOR } from '../GlobalConst';
+import { HOME_TABS } from '../actions/types';
 
 
 class GirlPager extends Component {
@@ -31,16 +33,29 @@ class GirlPager extends Component {
   constructor(props) {
     super(props);
     
+    this.isInitLoadData = false;
     this.curPageNo = 1;
     this.isLoadMoreing = false;
     this.onRetry = this._onRetry.bind(this);
   }
 
   componentDidMount() {
-    this._fetchData(0);
+    if (Platform.OS !== 'android') {
+      this._fetchData(0);
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    if (Platform.OS !== 'android') return true;
+
+    if (nextProps.curSelTag !== HOME_TABS.GIRL) return false;
+
+    if (!this.isInitLoadData) {
+      this.isInitLoadData = true;
+      this._fetchData(0);
+      return false;
+    }
+
     if (nextProps.status === FETCH_GIRL_DATA_STATUS.START) {
       return false;
     } else if (nextProps.status === FETCH_GIRL_DATA_STATUS.FAILURE) {

@@ -16,7 +16,7 @@ import {
   DrawerLayoutAndroid,
   Modal,
   Dimensions,
-  Platform 
+  Platform
 } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -28,6 +28,7 @@ import OvalButtonComp from '../comp/OvalButtonComp';
 import { FETCH_GANK_DAY_DATA_STATUS } from '../actions/types';
 import { fetchGankDay } from '../actions/gankApi';
 import { COMMON_BACKGROUND_COLOR, TITLE_BAR_HEIGHT } from '../GlobalConst';
+import { HOME_TABS } from '../actions/types';
 
 
 class GankDayPage extends Component {
@@ -40,6 +41,7 @@ class GankDayPage extends Component {
   constructor(props, context) {
     super(props, context);
 
+    this.isInitLoadData = false;
     this.renderDayHistoryDrawerMenuView = this._renderDayHistoryDrawerMenuView.bind(this);
     this.onDrawerOpen = this._onDrawerOpen.bind(this);
     this.onDrawerClose = this._onDrawerClose.bind(this);
@@ -52,8 +54,25 @@ class GankDayPage extends Component {
       pickerSelDay: null,
     };
   }
+
   componentDidMount() {
-    this._fetchDayListData();
+    if (Platform.OS !== 'android') {
+      this._fetchDayListData();
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (Platform.OS !== 'android') return true;
+
+    if (nextProps.curSelTag !== HOME_TABS.GANK_DAY) return false;
+
+    if (!this.isInitLoadData) {
+      this.isInitLoadData = true;
+      this._fetchDayListData();
+      return false;
+    }
+
+    return true;
   }
 
   render() {
@@ -254,7 +273,7 @@ class GankDayPage extends Component {
   	));
   }
 
-  _renderCategoryChildContentViews(dataSource, categoryName) {
+  _renderCategoryChildContentViews(dataSource, categoryName) {    
   	return dataSource.results[categoryName].map((info, index) => (
   	  <CommonTouchableComp key={index} onPress={this._onItemViewPress.bind(this, info.desc, info.url)}>
   	  	<View style={styles.categoryChildContainer}>
