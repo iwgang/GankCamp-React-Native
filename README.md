@@ -8,7 +8,7 @@
 1. 优化推荐页面UI
 1. 已知bug修复
 
-[更多更新记录](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/CHANGE.md)
+[更多更新记录](https://github.com/iwgang/GankCamp-React-Native/blob/master/CHANGE.md)
 
 ### 截图
 ![](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/gif_android_1.3.gif)
