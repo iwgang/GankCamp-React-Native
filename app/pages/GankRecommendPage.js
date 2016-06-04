@@ -6,53 +6,33 @@
  * https://github.com/iwgang/GankCamp-React-Native
  */
 import React, { Component } from 'react';
-import { 
-  StyleSheet, 
-  View, 
-  Text, 
-  Image, 
-  ScrollView, 
-  PickerIOS, 
-  DrawerLayoutAndroid,
-  Modal,
-  Dimensions,
-  Platform
-} from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, Platform, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 import WebViewPage from './WebViewPage';
+import ShowPicturePage from './ShowPicturePage';
 import CommonTouchableComp from '../comp/CommonTouchableComp';
 import CustomTitleBarComp from '../comp/CustomTitleBarComp';
 import CommonLoadView from '../comp/CommonLoadView';
-import OvalButtonComp from '../comp/OvalButtonComp';
+import HstoryDaySelectorComp from '../comp/HstoryDaySelectorComp';
 import { FETCH_GANK_DAY_DATA_STATUS } from '../actions/types';
 import { fetchGankDay } from '../actions/gankApi';
 import { COMMON_BACKGROUND_COLOR, TITLE_BAR_HEIGHT } from '../GlobalConst';
 import { HOME_TABS } from '../actions/types';
 
+const HEADER_PIC_HEIGHT = 330;
+const SCROLL_MAX_SIZE = HEADER_PIC_HEIGHT - TITLE_BAR_HEIGHT - ((Platform.OS === 'android' && Platform.Version < 19) ? 0 : (Platform.OS === 'android' ? 24 : 20));
+
 
 class GankDayPage extends Component {
 
-  static contextTypes = {
-    addBackButtonListener: React.PropTypes.func,
-    removeBackButtonListener: React.PropTypes.func,
-  };
-
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
 
     this.isInitLoadData = false;
-    this.renderDayHistoryDrawerMenuView = this._renderDayHistoryDrawerMenuView.bind(this);
-    this.onDrawerOpen = this._onDrawerOpen.bind(this);
-    this.onDrawerClose = this._onDrawerClose.bind(this);
-    this.onBackButton = this._onBackButton.bind(this);
     this.onRightBtnClick = this._onRightBtnClick.bind(this);
     this.onRetry = this._onRetry.bind(this);
-
-    this.state = {
-      pickerDayHistoryModalVisible: false,
-      pickerSelDay: null,
-    };
+    this.onScroll = this._onScroll.bind(this);
   }
 
   componentDidMount() {
@@ -76,28 +56,51 @@ class GankDayPage extends Component {
   }
 
   render() {
-    let contentView;
     if (this.props.status === FETCH_GANK_DAY_DATA_STATUS.INITIALIZE
           || this.props.status === FETCH_GANK_DAY_DATA_STATUS.START) {
-      contentView = <CommonLoadView loadState="ing" />;
+      return <CommonLoadView loadState="ing" />;
     } else if (this.props.status === FETCH_GANK_DAY_DATA_STATUS.FAILURE) {
-      contentView = <CommonLoadView loadState="error" onRetry={this.onRetry} />
+      return <CommonLoadView loadState="error" onRetry={this.onRetry} />;
     } else {
-      contentView = Platform.OS === 'android' ? this._renderGankDayContentViewWrapAndroid() : this._renderGankDayContentViewWrapIOS();
-    }
-    let title = `推荐 ${this.props.day}`;
-    return (
-      <View style={styles.container}>
+      let titleBarView = (
         <CustomTitleBarComp 
-          title={title}
-          onLeftBtnClick={this.props.onDrawerMenuToggle}
-          rightText="往期"
-          onRightBtnClick={this.onRightBtnClick}
-          isMainPage={true} 
-          />
-    	  {contentView}
-      </View>
-    );
+            ref="titleBarComp"
+            title={`推荐 ${this.props.day}`}
+            onLeftBtnClick={this.props.onDrawerMenuToggle}
+            rightText="往期"
+            onRightBtnClick={this.onRightBtnClick}
+            isMainPage={true} 
+            titleBarStyle={{position: 'absolute', top: 0, left: 0, right: 0}}
+            defBackgroundOpacity={0}
+            />
+      );
+      let contentView = this._renderGankDayContentView();
+      if (Platform.OS === 'android') {
+        return (
+          <View style={styles.container}>
+            <HstoryDaySelectorComp
+              ref="hstoryDaySelectorComp"
+              dataSource={this.historyDayDataList}
+              onSelected={this._onSelDayHistory.bind(this)}
+              >
+              {contentView}
+            </HstoryDaySelectorComp>
+            {titleBarView}
+          </View>
+        );
+      } else {
+        return (
+          <View style={styles.container}>
+            {contentView}
+            <HstoryDaySelectorComp
+              ref="hstoryDaySelectorComp"
+              onSelected={this._onSelDayHistory.bind(this)}
+              />
+            {titleBarView}
+          </View>
+        );
+      }
+    }
   }
 
   /**
@@ -107,8 +110,8 @@ class GankDayPage extends Component {
     fetch('http://gank.io/api/day/history')
       .then((response) => response.json())
       .then((responseData) => {
-        this.dayHistorys = responseData.results;
-        this._fetchDayData(this.dayHistorys[0]);
+        this.historyDayDataList = responseData.results;
+        this._fetchDayData(this.historyDayDataList[0]);
       })
       .catch((error) => {
         this.props.dispatch({type: FETCH_GANK_DAY_DATA_STATUS.FAILURE});
@@ -132,73 +135,11 @@ class GankDayPage extends Component {
       } else {
         this._fetchDayData(this.curDay);
       }
-    }, 2000)
+    }, 2000);
   }
 
   _onRightBtnClick() {
-    if (Platform.OS === 'android') {
-      if (this.refs.drawer !== undefined) {
-        this.refs.drawer.openDrawer();
-      }
-    } else {
-      this.setState({pickerDayHistoryModalVisible: true});
-    }
-  }
-
-  _renderGankDayContentViewWrapAndroid() {
-    return (
-      <DrawerLayoutAndroid
-        ref="drawer"
-        drawerWidth={190}
-        drawerLockMode="locked-closed" 
-        drawerPosition={DrawerLayoutAndroid.positions.Right}
-        renderNavigationView={this.renderDayHistoryDrawerMenuView}
-        onDrawerOpen={this.onDrawerOpen}
-        onDrawerClose={this.onDrawerClose} >
-        {this._renderGankDayContentView()}
-      </DrawerLayoutAndroid>
-    );
-  }
-
-  _renderGankDayContentViewWrapIOS() {
-    let selDayHistoryContentView;
-    if (this.dayHistorys !== undefined) {
-      selDayHistoryContentView = (
-        <Modal 
-          transparent={true}
-          visible={this.state.pickerDayHistoryModalVisible}
-          onRequestClose={() => this.setState({pickerDayHistoryModalVisible: false})} >
-          <View style={styles.pickerDayHistoryContainer}>
-            <PickerIOS 
-              style={{height: 230}}
-              selectedValue={this.state.pickerSelDay}
-              animationType="fade"
-              onValueChange={(itemValue, itemPosition) => this.setState({pickerSelDay: itemValue})}>
-              {this.dayHistorys.map((day, index) => {
-                return (
-                  <PickerIOS.Item key={index} label={'第' + day + '期'} value={day} />    
-                );
-              })}
-            </PickerIOS>
-            <View style={{flexDirection: 'row', marginTop: 20, marginBottom: 20}}>
-              <View style={{flex: 1, alignItems: 'center'}}>
-                <OvalButtonComp onPress={() => this.setState({pickerDayHistoryModalVisible: false})}>取消</OvalButtonComp>
-              </View>
-              <View style={{flex: 1, alignItems: 'center'}}>
-                <OvalButtonComp onPress={() => this._onSelDayHistoryIOS()}>选择</OvalButtonComp>
-              </View>
-            </View>
-          </View>
-        </Modal>
-      );
-    }
-
-    return (
-      <View style={{flex: 1}}>
-        {this._renderGankDayContentView()}
-        {selDayHistoryContentView}
-      </View>
-    );
+    this.refs.hstoryDaySelectorComp.show(this.historyDayDataList, this.originalDay);
   }
 
   _renderGankDayContentView() {
@@ -207,59 +148,21 @@ class GankDayPage extends Component {
   	let categoryContentView = this._renderCategoryContentViews(dataSource);
   	return (
       <ScrollView
+        onScroll={this.onScroll}
+        scrollEventThrottle={5}
+        bounces={false}
         automaticallyAdjustContentInsets={false}>
         <View style={{flex: 1, paddingBottom: 60}}>
-          <Image source={{uri: girlPicUrl}} style={styles.headerGirlImage}/>
+          <TouchableOpacity 
+            activeOpacity={0.8}
+            onPress={this._onItemViewPress.bind(this, '', girlPicUrl, '福利')}
+            >
+            <Image source={{uri: girlPicUrl}} style={styles.headerGirlImage}/>
+          </TouchableOpacity>
           {categoryContentView}
         </View>
       </ScrollView>
   	);
-  }
-
-  _renderDayHistoryDrawerMenuView() {
-    if (this.dayHistorys === undefined) return;
-    return (
-      <ScrollView
-        automaticallyAdjustContentInsets={false}>
-        <View>
-          {this.dayHistorys.map((day, index) => {
-            return (
-              <CommonTouchableComp key={index} onPress={this._onSelDayHistoryAndroid.bind(this, this.dayHistorys[index])}>
-                <View style={styles.dayHistoryContainer}>
-                  <Text style={styles.dayHistoryText}>第{day}期</Text>
-                </View>
-              </CommonTouchableComp>
-            );
-          })}
-        </View>
-      </ScrollView>
-    );
-  }
-
-  _onSelDayHistoryAndroid(day) {
-    this._onBackButton();
-    this._fetchDayData(day);
-  }
-
-  _onSelDayHistoryIOS() {
-    this.setState({pickerDayHistoryModalVisible: false});
-    this._fetchDayData(this.state.pickerSelDay);
-  }
-
-  _onDrawerOpen() {
-    this.context.addBackButtonListener(this.onBackButton);
-  }
-
-  _onDrawerClose() {
-    this.context.removeBackButtonListener(this.onBackButton);
-  }
-
-  _onBackButton() {
-    if (this.refs.drawer !== undefined) {
-      this.refs.drawer.closeDrawer();
-      return true;
-    }
-    return false;
   }
 
   _renderCategoryContentViews(dataSource) {
@@ -275,7 +178,7 @@ class GankDayPage extends Component {
 
   _renderCategoryChildContentViews(dataSource, categoryName) {    
   	return dataSource.results[categoryName].map((info, index) => (
-  	  <CommonTouchableComp key={index} onPress={this._onItemViewPress.bind(this, info.desc, info.url)}>
+  	  <CommonTouchableComp key={index} onPress={this._onItemViewPress.bind(this, info.desc, info.url, categoryName)}>
   	  	<View style={styles.categoryChildContainer}>
           <View style={styles.categoryChildTitleContainer}>
             <Text style={styles.categoryChildTitleDot}>•{'  '}</Text>
@@ -287,16 +190,38 @@ class GankDayPage extends Component {
   	));
   }
 
-  _onItemViewPress(title, url) {
-    this.props.navigator.push({
-      component: WebViewPage,
-      title, 
-      url,
-    });
+  _onItemViewPress(title, url, categoryName) {
+    if ('福利' === categoryName) {
+      this.props.navigator.push({
+        component: ShowPicturePage, 
+        picUrl: url,
+      });
+    } else {
+      this.props.navigator.push({
+        component: WebViewPage,
+        title, 
+        url,
+      });
+    }
   }
 
   _convertDay(day) {
+    this.originalDay = day;
     return day.replace(/-/g, '/');
+  }
+
+  _onSelDayHistory(selDay) {
+    this._fetchDayData(selDay);
+    this.refs.titleBarComp.setBackgroundOpacity && this.refs.titleBarComp.setBackgroundOpacity(0);
+  }
+
+  _onScroll(event) {
+    let offsetY = event.nativeEvent.contentOffset.y;
+    if (offsetY > SCROLL_MAX_SIZE) {
+      offsetY = SCROLL_MAX_SIZE;
+    }
+    let opacity = offsetY / SCROLL_MAX_SIZE;
+    this.refs.titleBarComp.setBackgroundOpacity && this.refs.titleBarComp.setBackgroundOpacity(opacity);
   }
 
 }
@@ -308,7 +233,7 @@ const styles = StyleSheet.create({
     backgroundColor: COMMON_BACKGROUND_COLOR,
   },
   headerGirlImage: {
-  	height: 300,
+  	height: HEADER_PIC_HEIGHT,
   },
   categoryLabel: {
     color: '#000000',
@@ -346,19 +271,6 @@ const styles = StyleSheet.create({
   categoryChildAuthor: {
     color: '#999999',
     fontSize: 14,
-  },
-  dayHistoryContainer: {
-    height: 40,
-    justifyContent: 'center',
-    paddingLeft: 10,
-  },
-  dayHistoryText: {
-    color: '#333333',
-    fontSize: 16,
-  },
-  pickerDayHistoryContainer: {
-    backgroundColor: COMMON_BACKGROUND_COLOR,
-    marginTop: TITLE_BAR_HEIGHT + 20,
   },
 });
 

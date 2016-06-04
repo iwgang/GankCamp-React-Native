@@ -29,6 +29,11 @@ class AboutPage extends Component {
               {'      '}这里每日分享妹子图 和 技术干货，还有供大家中午休息的休闲视频，让你休闲技术两不误.
             </Text>
             <LinkText 
+              navigator={this.props.navigator}
+              linkUrl="https://github.com/iwgang/GankCamp-React-Native" 
+              linkText="本项目已在GitHub上开源，点击直达"
+              />
+            <LinkText 
               navigator={this.props.navigator} 
               linkUrl="http://gank.io" 
               beforeText="感谢"
@@ -60,6 +65,12 @@ class AboutPage extends Component {
               beforeText="    •   " 
               linkUrl="https://github.com/gaearon/redux-thunk" 
               linkText="redux-thunk"
+              />
+            <LinkText 
+              navigator={this.props.navigator}
+              beforeText="    •   " 
+              linkUrl="https://realm.io/docs/react-native/latest" 
+              linkText="realm"
               />
             <LinkText 
               navigator={this.props.navigator} 

@@ -7,7 +7,6 @@
  */
 import React, { Component } from 'react';
 import { Navigator, StatusBar, StyleSheet, View, BackAndroid, Platform } from 'react-native';
-import { connect } from 'react-redux';
 import MainPage from './pages/MainPage';
 import { showToast } from './comp/CommonComp';
 

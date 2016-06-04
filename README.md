@@ -3,24 +3,22 @@
 # GankCamp-React-Native
 这是一款用react-native实现的Gank.io(干货集中营)客户端，支持Android及iOS，并针对不同平台的设计规范，界面也有一些差异化.
 
-#### 更新 v1.2 （下载[APK](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/apk/GankCamp_v1.2.apk)，iOS请自行编译）
-1. Android版主界面切换逻辑调整，二次切换不会再重新加载
-1. 增加启动页面
+#### 更新 v1.3 (2016-06-05) （下载[APK](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/apk/GankCamp_v1.3.apk)，iOS请自行编译）
+1. 干货增加前端分类
+1. 优化推荐页面UI
 1. 已知bug修复
 
-#### 更新 v1.1 （下载[APK](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/apk/GankCamp_v1.1.apk)，iOS请自行编译）
-1. 增加收藏功能，DAO层使用[realm](https://realm.io/docs/react-native/latest)
-1. 页面细节优化
+[更多更新记录](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/CHANGE.md)
 
 ### 截图
-![](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/gif_android.gif)
+![](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/gif_android_1.3.gif)
 
 **左图：Android， 右图：iOS**  
-<img src="https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/s1_android.jpg" width="360px" height="600px" />     <img src="https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/s1_ios.png" width="360px" height="600px"/>
+<img src="https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/s1_android_v1.3.jpg" width="360px" height="600px" />     <img src="https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/s1_ios_v1.3.png" width="360px" height="600px"/>
 
 **其它截图** (下列截图为Android版本的，iOS版本类似)  
 <img src="https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/s0_splash.jpg" width="400px" height="650px"/>
-<img src="https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/s2_android.jpg" width="400px" height="650px"/>
+<img src="https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/s2_android_v1.3.jpg" width="400px" height="650px"/>
 <img src="https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/s3_android.jpg" width="400px" height="650px"/>
 <img src="https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/screenshot/smenu_android.jpg" width="400px" height="650px"/>
 

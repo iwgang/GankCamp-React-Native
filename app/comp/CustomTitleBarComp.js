@@ -18,13 +18,9 @@ class CustomTitleBarComp extends Component {
     super(props);
 
     this.isMainPage = this.props.isMainPage;
-  }
-
-  /**
-   * 供其它地方调用来改动标题栏中的tab指示器位置
-   */
-  onPageScroll(offset) {
-    this.refs.titleBarHeaderTab.onPageScroll(offset);
+    this.state = {
+      opacity: typeof this.props.defBackgroundOpacity === 'undefined' ? 1 : this.props.defBackgroundOpacity,
+    }
   }
 
   render() {
@@ -55,9 +51,9 @@ class CustomTitleBarComp extends Component {
     } else {
       rightView = <View style={styles.placeholderView} />;
     }
-
+    let titleBarBackgoundRgba = `rgba(156, 151, 139, ${this.state.opacity})`;
     return (
-      <View style={[styles.container, this.props.titleBarStyle]}>
+      <View style={[{backgroundColor: titleBarBackgoundRgba}, styles.container, this.props.titleBarStyle]}>
         <View style={styles.titleBarContainer}>
           {leftView}
           <Text style={styles.titleBarTitle} numberOfLines={1}>{this.props.title}</Text>
@@ -66,6 +62,20 @@ class CustomTitleBarComp extends Component {
         {this._renderHeaderTabContent()}
       </View>
     );
+  }
+
+  /**
+   * 供其它地方调用来改动标题栏中的tab指示器位置
+   */
+  onPageScroll(offset) {
+    this.refs.titleBarHeaderTab.onPageScroll(offset);
+  }
+
+  /**
+   * 供其它地方调用来设置背景透明度
+   */
+  setBackgroundOpacity(opacity) {
+    this.setState({opacity});
   }
 
   _renderHeaderTabContent() {
@@ -85,7 +95,6 @@ class CustomTitleBarComp extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: APP_MAIN_COLOR,
     paddingTop: (Platform.OS === 'android' && Platform.Version < 19) ? 0 : (Platform.OS === 'android' ? 24 : 20),
   },
   titleBarContainer: {

@@ -7,9 +7,9 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  Image,
   RefreshControl,
   Text,
+  Image,
   View,
   TouchableOpacity,
   Platform,
@@ -21,6 +21,7 @@ import ShowPicturePage from './ShowPicturePage';
 import CustomTitleBarComp from '../comp/CustomTitleBarComp';
 import GridViewComp from '../comp/GridViewComp';
 import CommonLoadView from '../comp/CommonLoadView';
+import ImageView from '../comp/ImageView';
 import { FETCH_GIRL_DATA_STATUS } from '../actions/types';
 import { fetchGirlList } from '../actions/gankApi';
 import { showToast } from '../comp/CommonComp';
@@ -95,8 +96,8 @@ class GirlPager extends Component {
           itemsPerRow={2}
           renderItem={this._renderItem.bind(this)}
           onEndReachedThreshold={5}
-          onEndReached={this._onLoadMore.bind(this)}
-          renderFooter={this.props.isLoadMore && this._footerView}
+          onEndReached={this.props.isLoadMore ? this._onLoadMore.bind(this) : null}
+          renderFooter={this.props.isLoadMore ? this._footerView : null}
           refreshControl={
               <RefreshControl
                   refreshing={this.props.isRefreshing}
@@ -176,7 +177,7 @@ class GirlPager extends Component {
         style={{flex: 1}}
         activeOpacity={0.8}
         onPress={this._onItemViewPress.bind(this, item.url)}>
-        <Image
+        <ImageView
           source={{uri: item.url}}
           defaultSource={require('../img/ic_common_load_error.png')}
           resizeMode={Image.resizeMode.cover}
@@ -184,7 +185,7 @@ class GirlPager extends Component {
           <View style={styles.titleContainer}>
             <Text style={styles.title}>via：{item.who}</Text>
           </View>
-        </Image>
+        </ImageView>
       </TouchableOpacity>
     );
   }

@@ -75,11 +75,7 @@ class ViewPagerComp extends Component {
         ref="scrollview"
         initialPage={this.state.initialSelectedIndex}
         onPageSelected={this.handleHorizontalScroll}
-        onPageScroll={(event) =>  {
-          if (this.props.onViewPageScroll) {
-            this.props.onViewPageScroll(event.nativeEvent.offset);
-          }
-        }}
+        onPageScroll={(event) =>  this.props.onViewPageScroll && this.props.onViewPageScroll(event.nativeEvent.position + event.nativeEvent.offset)}
         style={styles.container}>
         {this._renderContent()}
       </ViewPagerAndroid>

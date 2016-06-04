@@ -19,11 +19,6 @@ class CustomTitleBarHeaderTabComp extends Component {
   	const dynamicTabUnderline = {
       left: this.state.leftTabUnderline,
     };
-
-    const tabUnderlineStyle = {
-
-    };
-
     return (
       <View style={styles.container}>
         {this.props.children}
@@ -35,7 +30,6 @@ class CustomTitleBarHeaderTabComp extends Component {
 
   onPageScroll(offset) {
     if (offset === 0) return;
-    // TODO 这里只是简单实现了指示器的偏移滚动，只适合只有两个tab的情况，两个以上tab的使用情况下需要增加下判断，
     this.state.leftTabUnderline.setValue(TAB_WIDTH * offset);
   }
 

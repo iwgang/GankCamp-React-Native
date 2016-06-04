@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableHighlight, Animated } from 'react-native';
 
-const TAB_WIDTH = 100;
-const TAB_HEIGHT = 30;
+const TAB_WIDTH = 75;
+const TAB_HEIGHT = 25;
 
 class CustomTitleBarHeaderTabComp extends Component {
 
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   headerTabsText: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#FFFFFF',
     textAlign: 'center',
   },

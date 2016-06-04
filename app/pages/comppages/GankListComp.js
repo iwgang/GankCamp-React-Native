@@ -81,9 +81,9 @@ class GankListComp extends Component {
           renderRow={this._renderItem.bind(this)}
           automaticallyAdjustContentInsets={false}
           onEndReachedThreshold={5}
-          onEndReached={this._onLoadMore.bind(this)}
+          onEndReached={this.props.isLoadMore ? this._onLoadMore.bind(this) : null}
           renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
-          renderFooter={this.props.isLoadMore && this._footerView}
+          renderFooter={this.props.isLoadMore ? this._footerView : null}
           refreshControl={
               <RefreshControl
                   refreshing={this.props.isRefreshing}

@@ -44,19 +44,29 @@ class HomePage extends Component {
             selected={this.props.selectedTabIndex == 1} 
             onTabClick={this._switchTitleBarTab.bind(this, 1)}
             />
+          <CustomTitleBarComp.HeaderTabItem
+            tabText={'前端'}
+            selected={this.props.selectedTabIndex == 2} 
+            onTabClick={this._switchTitleBarTab.bind(this, 2)}
+            />
         </CustomTitleBarComp>
         <ViewPagerComp 
           selectedIndex={this.props.selectedTabIndex}
           onViewPageScroll={this.onViewPageScroll}
           onSelectedIndexChange={(curSelIndex) => this._switchTitleBarTab(curSelIndex)}>
           <GankListComp 
-            tagName="tag_1" 
+            tagName="tag_1"
             category="Android"
             navigator={this.props.navigator}
             />
           <GankListComp 
             tagName="tag_2"
             category="iOS"
+            navigator={this.props.navigator}
+            />
+          <GankListComp 
+            tagName="tag_3"
+            category="前端"
             navigator={this.props.navigator}
             />
         </ViewPagerComp>
