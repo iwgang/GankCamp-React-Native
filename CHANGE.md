@@ -5,8 +5,6 @@
 1. 优化推荐页面UI
 1. 已知bug修复
 
-[历史更新记录](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/CHANGE.md)
-
 #### 更新 v1.2 (2016-06-01) （下载[APK](https://raw.githubusercontent.com/iwgang/GankCamp-React-Native/master/apk/GankCamp_v1.2.apk)，iOS请自行编译）
 1. Android版主界面切换逻辑调整，二次切换不会再重新加载
 1. 增加启动页面
