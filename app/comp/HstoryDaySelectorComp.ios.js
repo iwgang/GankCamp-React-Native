@@ -20,10 +20,10 @@ class HstoryDaySelectorComp extends Component {
   }
 
   render() {
-  	let contentView;
-  	if (null !== this.state.dataSource && this.state.dataSource.length > 0) {
-  	  contentView = (
-  	  	<View style={styles.contentViewStyle}>
+    let contentView;
+    if (null !== this.state.dataSource && this.state.dataSource.length > 0) {
+      contentView = (
+         <View style={styles.contentViewStyle}>
           <PickerIOS 
             style={{height: 230}}
             selectedValue={this.state.selDay}
@@ -46,8 +46,8 @@ class HstoryDaySelectorComp extends Component {
             </View>
           </View>
         </View>
-  	  );
-  	}
+      );
+    }
     return (
       <Modal 
         transparent={true}
@@ -63,20 +63,20 @@ class HstoryDaySelectorComp extends Component {
   }
 
   show(dataSource, defSelDay) {
-  	this.setState({
-  	  visible: true,
+    this.setState({
+      visible: true,
       selDay: defSelDay,
-  	  dataSource,
-  	});
+      dataSource,
+    });
   }
 
   _hideMode() {
-  	this.setState({visible: false});
+    this.setState({visible: false});
   }
 
   _onSelected(selDay) {
-  	this.hideMode();
-  	this.props.onSelected && this.props.onSelected(this.state.selDay);
+    this.hideMode();
+    this.props.onSelected && this.props.onSelected(this.state.selDay);
   }
 
 }

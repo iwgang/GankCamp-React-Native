@@ -38,7 +38,7 @@ class DrawerMenuComp extends Component {
         {this._renderDrawerItem(HOME_TABS.GIRL, '妹纸', ICON_TAB_GIRL)}
 
         {this._renderDrawerItem(HOME_TABS.COLLECT, '收藏', ICON_TAB_COLLECT)}
-  	  </View>
+      </View>
     );
   }
 }
@@ -81,11 +81,11 @@ const styles = StyleSheet.create({
     backgroundColor: COMMON_SELECT_COLOR,
   },
   drawerItemText: {
-  	color: '#999999',
-  	textAlign: 'center',
+    color: '#999999',
+    textAlign: 'center',
     marginLeft: 10,
     fontSize: 16,
-  	textAlignVertical: 'center',
+    textAlignVertical: 'center',
   },
   drawerItemTextSelected: {
     color: '#495c73',

@@ -6,11 +6,11 @@ import { getCollects, addCollect, removeCollect, isCollect } from '../db/collecD
  * 获取收藏列表数据
  */
 export function fetchCollectListAction() {
-	let collects = getCollects();
-	return {
-		type: FETCH_COLLECT_DATA_STATUS.SUCCESS,
-		data: collects,
-	};
+  let collects = getCollects();
+  return {
+    type: FETCH_COLLECT_DATA_STATUS.SUCCESS,
+    data: collects,
+  };
 }
 
 /**
@@ -19,11 +19,11 @@ export function fetchCollectListAction() {
  * url:   链接url
  */
 export function addCollectAction(title, url) {
-	let newCollect = addCollect(title, url);
-	return {
-		type: FETCH_COLLECT_DATA_STATUS.ADD,
-		data: newCollect,
-	};
+  let newCollect = addCollect(title, url);
+  return {
+    type: FETCH_COLLECT_DATA_STATUS.ADD,
+    data: newCollect,
+  };
 }
 
 /**
@@ -31,12 +31,12 @@ export function addCollectAction(title, url) {
  * url:   链接url
  */
 export function removeCollectAction(url) {
-	removeCollect(url);
-	let collects = getCollects();
-	return {
-		type: FETCH_COLLECT_DATA_STATUS.REMOVE,
-		data: collects,
-	};
+  removeCollect(url);
+  let collects = getCollects();
+  return {
+    type: FETCH_COLLECT_DATA_STATUS.REMOVE,
+    data: collects,
+  };
 }
 
 /**
@@ -44,9 +44,9 @@ export function removeCollectAction(url) {
  * url:   链接url
  */
 export function collectStatusAction(url) {
-	let isCollected = isCollect(url);
-	return {
-		type: FETCH_COLLECT_DATA_STATUS.COLLECT_STATUS,
-		isCollect: isCollected,
-	};
+  let isCollected = isCollect(url);
+  return {
+    type: FETCH_COLLECT_DATA_STATUS.COLLECT_STATUS,
+    isCollect: isCollected,
+  };
 }

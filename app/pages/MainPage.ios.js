@@ -25,8 +25,8 @@ class MainPage extends Component {
   }
 
   render() {
-  	return (
- 	  <TabBarIOS
+    return (
+    <TabBarIOS
         tintColor={'#FF5000'}
         barTintColor={'#F5FCFF'}>
         <TabBarIOS.Item
@@ -58,7 +58,7 @@ class MainPage extends Component {
           <CollectListPage navigator={this.props.navigator} />
         </TabBarIOS.Item>
       </TabBarIOS>
-  	);
+    );
   }
 
 }

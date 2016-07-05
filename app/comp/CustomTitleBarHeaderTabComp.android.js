@@ -8,15 +8,15 @@ const TAB_HEIGHT = 30;
 class CustomTitleBarHeaderTabComp extends Component {
 
   constructor(props) {
-  	super(props);
+    super(props);
 
-  	this.state = {
+    this.state = {
       leftTabUnderline: new Animated.Value(0),
     };
   }
 
   render() {
-  	const dynamicTabUnderline = {
+    const dynamicTabUnderline = {
       left: this.state.leftTabUnderline,
     };
     return (
@@ -41,8 +41,8 @@ class HeaderTabItem extends Component {
     return (
       <TouchableHighlight underlayColor={'rgba(0,0,0,0)'} onPress={this.props.onTabClick}>
         <View style={styles.headerTabsTextContainer}>
-        	<Text style={styles.headerTabsText}>{this.props.tabText}</Text>
-     		</View>
+          <Text style={styles.headerTabsText}>{this.props.tabText}</Text>
+        </View>
       </TouchableHighlight>
     );
   }
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     marginLeft:TITLE_BAR_HEIGHT,
   },
-	headerTabsText: {
+  headerTabsText: {
     fontSize: 16,
     color: '#FFFFFF',
     textAlign: 'center',

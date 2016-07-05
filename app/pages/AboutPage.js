@@ -105,9 +105,9 @@ class AboutPage extends Component {
               beforeText="    WeiBo ："
               linkText="weibo.com/iwgang"
               />
-	    		</View>
-  	    </ScrollView>
-    	</View>
+          </View>
+        </ScrollView>
+      </View>
     );
   }
   
@@ -164,9 +164,9 @@ const styles = StyleSheet.create({
   contentDesc: {
     color: '#999999',
     fontSize: 14,
-		marginTop: 10,
-		lineHeight: 23,
-	},
+    marginTop: 10,
+    lineHeight: 23,
+  },
   linkTextContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',

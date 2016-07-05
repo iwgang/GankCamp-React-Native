@@ -11,12 +11,12 @@ const LOAD_STATE_ERROR = 'error';
 
 class CommonLoadView extends Component {
 
-	static propTypes = {
-		loadState: PropTypes.oneOf([
-  		LOAD_STATE_ING,
-    	LOAD_STATE_ERROR
-  	]).isRequired,
-	};
+  static propTypes = {
+    loadState: PropTypes.oneOf([
+      LOAD_STATE_ING,
+      LOAD_STATE_ERROR
+    ]).isRequired,
+  };
 
   constructor(props) {
     super(props);
@@ -31,12 +31,12 @@ class CommonLoadView extends Component {
   }
   
   render() {
-  	let contentView;
-  	if (this.props.loadState === LOAD_STATE_ERROR) {
-  		contentView = this._renderErrorView();
-  	} else {
-			contentView = this._renderLoadingView();
-  	}
+    let contentView;
+    if (this.props.loadState === LOAD_STATE_ERROR) {
+      contentView = this._renderErrorView();
+    } else {
+      contentView = this._renderLoadingView();
+    }
 
     return (
       <View style={styles.container}>
@@ -48,10 +48,10 @@ class CommonLoadView extends Component {
   _renderLoadingView() {
     return (
       <View style={styles.commonChildContainer}>
-       	<Spinner 
-       		size={45}
-       		type={this.state.spinnerType}
-       		color={APP_MAIN_COLOR} />
+        <Spinner 
+          size={45}
+          type={this.state.spinnerType}
+          color={APP_MAIN_COLOR} />
         <Text style={styles.tipsText}>
           正在加载中...
         </Text>
@@ -74,19 +74,19 @@ class CommonLoadView extends Component {
 
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
+  container: {
+    flex: 1,
     backgroundColor: COMMON_BACKGROUND_COLOR,
   },
   commonChildContainer: {
-		flex: 1,
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
   tipsText: {
-  	color: '#999999',
-  	fontSize: 15,
-  	marginTop: 10,
+    color: '#999999',
+    fontSize: 15,
+    marginTop: 10,
   },
   errorTipsText: {
     color: '#999999',

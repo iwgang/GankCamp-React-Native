@@ -143,10 +143,10 @@ class GankDayPage extends Component {
   }
 
   _renderGankDayContentView() {
-  	let dataSource = this.props.dataSource;
-  	let girlPicUrl = dataSource.results.福利[0].url;
-  	let categoryContentView = this._renderCategoryContentViews(dataSource);
-  	return (
+    let dataSource = this.props.dataSource;
+    let girlPicUrl = dataSource.results.福利[0].url;
+    let categoryContentView = this._renderCategoryContentViews(dataSource);
+    return (
       <ScrollView
         onScroll={this.onScroll}
         scrollEventThrottle={5}
@@ -162,32 +162,32 @@ class GankDayPage extends Component {
           {categoryContentView}
         </View>
       </ScrollView>
-  	);
+    );
   }
 
   _renderCategoryContentViews(dataSource) {
-  	dataSource.category.sort(); // 分类名称重新排序
-	  return dataSource.category.map((categoryName, index) => (
-  	  <View key={index}>
-  	    <Text style={styles.categoryLabel}>{categoryName}</Text>
+    dataSource.category.sort(); // 分类名称重新排序
+    return dataSource.category.map((categoryName, index) => (
+      <View key={index}>
+        <Text style={styles.categoryLabel}>{categoryName}</Text>
         <View style={styles.categoryLine} />
-  	    {this._renderCategoryChildContentViews(dataSource, categoryName)}
-  	  </View>
-  	));
+        {this._renderCategoryChildContentViews(dataSource, categoryName)}
+      </View>
+    ));
   }
 
   _renderCategoryChildContentViews(dataSource, categoryName) {    
-  	return dataSource.results[categoryName].map((info, index) => (
-  	  <CommonTouchableComp key={index} onPress={this._onItemViewPress.bind(this, info.desc, info.url, categoryName)}>
-  	  	<View style={styles.categoryChildContainer}>
+    return dataSource.results[categoryName].map((info, index) => (
+      <CommonTouchableComp key={index} onPress={this._onItemViewPress.bind(this, info.desc, info.url, categoryName)}>
+        <View style={styles.categoryChildContainer}>
           <View style={styles.categoryChildTitleContainer}>
             <Text style={styles.categoryChildTitleDot}>•{'  '}</Text>
             <Text style={styles.categoryChildTitle}>{info.desc}</Text>
           </View>
-  	  	  <Text style={styles.categoryChildAuthor}>{info.who}</Text>
-  	  	</View>
-  	  </CommonTouchableComp>
-  	));
+          <Text style={styles.categoryChildAuthor}>{info.who}</Text>
+        </View>
+      </CommonTouchableComp>
+    ));
   }
 
   _onItemViewPress(title, url, categoryName) {
@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
     backgroundColor: COMMON_BACKGROUND_COLOR,
   },
   headerGirlImage: {
-  	height: HEADER_PIC_HEIGHT,
+    height: HEADER_PIC_HEIGHT,
   },
   categoryLabel: {
     color: '#000000',

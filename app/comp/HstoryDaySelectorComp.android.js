@@ -116,7 +116,7 @@ class HstoryDaySelectorComp extends Component {
 
   _onSelected(selDay) {
     this.refs.drawer.closeDrawer();
-  	this.props.onSelected && this.props.onSelected(selDay);
+    this.props.onSelected && this.props.onSelected(selDay);
   }
 
   _onDrawerOpen() {

@@ -7,12 +7,12 @@ import SplashPage from './SplashPage';
 import { DEBUG, RDEBUG } from './GlobalConst';
 
 global.LOG = (msg) => {
-	if (DEBUG) console.log(msg);
+  if (DEBUG) console.log(msg);
 }
 
 // Redux相关信息日志
 global.RLOG = (msg) => {
-	if (DEBUG && RDEBUG) console.log(msg);
+  if (DEBUG && RDEBUG) console.log(msg);
 }
 
 const store = configureStore();
@@ -20,7 +20,7 @@ const store = configureStore();
 
 class App extends Component {
 
-	 constructor(props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -29,15 +29,15 @@ class App extends Component {
   }
  
   render() {
-  	if (this.state.isShowSplash) {
-  		return <SplashPage onAnimEnd={() => this.setState({isShowSplash: false})} />;
-  	} else {
-	    return (
-			  <Provider store={store}>
-			    <RootPage />
-			  </Provider>
-			);
-  	}
+    if (this.state.isShowSplash) {
+      return <SplashPage onAnimEnd={() => this.setState({isShowSplash: false})} />;
+    } else {
+      return (
+        <Provider store={store}>
+          <RootPage />
+        </Provider>
+      );
+    }
   }
 
 }

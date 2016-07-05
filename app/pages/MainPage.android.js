@@ -26,9 +26,9 @@ class MainPage extends Component {
   };
 
   constructor(props, context) {
-	  super(props, context);
+    super(props, context);
 
-	  this.renderDrawerMenuView = this._renderDrawerMenuView.bind(this);
+    this.renderDrawerMenuView = this._renderDrawerMenuView.bind(this);
     this.onDrawerOpen = this._onDrawerOpen.bind(this);
     this.onDrawerClose = this._onDrawerClose.bind(this);
     this.onBackButton = this._onBackButton.bind(this);
