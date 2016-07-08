@@ -11,8 +11,10 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by wanggang on 2016/5/16.
- * E-Mail: wanggang@6lapp.com
+ * 可放大缩小的图片组件Package
+ *  -- 原生放大缩小图片使用的类库为（https://github.com/bm-x/PhotoView）
+ * Created by iWgang on 16/05/26.
+ * https://github.com/iwgang/GankCamp-React-Native
  */
 public class RNTouchImageViewPackage implements ReactPackage {
 
